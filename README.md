@@ -1,1 +1,2 @@
 # odin-calculator-project
+This is the last project on odin foundation course, it has been fun learning html,css and javascript basics.To demostrate what so far i have understood,i will be creating a basic calculator.
