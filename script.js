@@ -50,19 +50,21 @@ const keyboardBackspace=['Backspace'];
 let firstNumber='';
 let secondNumber='';
 let operator='';
+let justCalculated=false;
 
 
 function handleDigits(key){
-    if(resultDisplay.textContent!==''&&secondValue.textContent!==''){
+    if(justCalculated){
             resultDisplay.textContent='';
+            firstNumber='';
+            firstValue.textContent= firstNumber;
             operator='';
             operatorSign.textContent=operator;
             secondNumber='';
             secondValue.textContent=secondNumber;
-            firstNumber='';
-            firstNumber += `${key}`;
-            firstValue.textContent= firstNumber;
-         }else{
+            justCalculated=false;
+            
+         }
             if(operator === ''){
                
                 firstNumber += `${key}`;
@@ -74,7 +76,7 @@ function handleDigits(key){
                 
                 secondNumber += `${key}`;
                 secondValue.textContent= secondNumber;
-            }}
+            }
 }
 function handleOperators(key){
     if (firstNumber==='')return;
@@ -83,10 +85,11 @@ function handleOperators(key){
             firstNumber=`${results}`;
             resultDisplay.textContent=results;
             firstValue.textContent=firstNumber;
-            secondNumber='';
-            secondValue.textContent=secondNumber;
             operator=key;
             operatorSign.textContent=operator;
+            secondNumber='';
+            secondValue.textContent=secondNumber;
+        
 
         }
             operator= key;
@@ -109,6 +112,7 @@ function handleDecimal(){
 function handleEqualSign(){
      if(firstNumber!==''&& secondNumber!==''){
             resultDisplay.textContent=operate(firstNumber,secondNumber,operator);
+            justCalculated=true;
         }
 
 }
@@ -155,7 +159,7 @@ function updateValues(){
         clickedSigns.forEach((item)=>{
 
          item.addEventListener("click",(event)=>{
-            const key=event.currentTarget.textContent;
+         const key=event.currentTarget.textContent;
             handleOperators(key);
             })
         })
